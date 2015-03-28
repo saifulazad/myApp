@@ -1,0 +1,46 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "base.html" %}
+{% block content %}
+
+  <body>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<form method="post" action="{{ url_for('register') }}">
+					<div class="form-group">
+						<label for="exampleInputName2">Name</label>
+						<input type="text" class="form-control" name="name" placeholder="Name">
+						{{ render_field(form.name) }}
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName2">Dept</label>
+						<input type="text" class="form-control" name="dept" placeholder="Dept">
+						{{ render_field(form.dept) }}
+						
+					
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName2">Graduation Year</label>
+						<input type="text" class="form-control" name="grad_year" placeholder="Graduation Year">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName2">Current Organization</label>
+						<input type="text" class="form-control" name="current_organization" placeholder="Current Organization">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName2">Hotline</label>
+						<input type="text" class="form-control" name="phone_no" placeholder="Phone No">
+					</div>
+					
+					<button type="submit" class="btn pull-right">Submit</button>
+				</form>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+    
+
+
+  
+
+	</body>
+{% endblock %}
