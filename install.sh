@@ -1,3 +1,4 @@
+python -m pip install redis
 python -m pip install flask
 python -m pip install flask-login
 python -m pip install flask-openid
