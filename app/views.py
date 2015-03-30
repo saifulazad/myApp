@@ -1,10 +1,14 @@
 from flask import *
+from sqlalchemy.util.compat import import_
 from app import app, user_info
 from app import db, models
+from app.Product_Info import Product_information
 from regForm import RegistrationForm, LoginForm
 from db_reg_user import RegUser
 from flask import render_template, flash, redirect, session, url_for, request, g
 from user_info import *
+from Product_Info import *
+
 # from user_info import Userinfo
 
 from functools import wraps
@@ -45,7 +49,15 @@ def store():
 
 @app.route('/store')
 def index():
-    return render_template("store.html")
+
+    all= Product_information()
+
+    rule = request.url_rule
+    basic_info = all.getPrductAllinfo()
+    for x in basic_info:
+        print x.__dict__
+ #   print  rule
+    return render_template("store.html",basic_info =basic_info)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -88,11 +100,13 @@ def register():
         return redirect(url_for('login'))
     return render_template('reg.html', form=form, error=error)
 
-'''
-@app.route('/product/<productname>')
+
+@app.route('/store/<productname>')
 def user(productname):
 
-
+  #  print  productname
+    return render_template('info_of_product.html')
+'''
 
     user = User.query.filter_by(productname=productname).first()
     if user == None:

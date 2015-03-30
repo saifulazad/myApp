@@ -1,0 +1,18 @@
+{% macro render_basic_element_field(basic_element) %}
+
+  
+<div class="col-md-2 portfolio-item">
+    <a href="#">
+        <img class="img-responsive" src="{{ url_for('static', filename =  basic_element.name.lower())+'.jpg' }}" width="100" height="100">
+    </a>
+    <h3>
+        <a href="{{ request.path+'/'+basic_element.name }}">{{ basic_element.name }}
+        </a>
+    </h3>
+    <div class="form-group has-error">
+         <label class="control-label" for="inputError1">BDT {{ basic_element.price }}</label>
+    </div>
+</div>
+
+  
+{% endmacro %}
