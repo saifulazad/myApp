@@ -2,31 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a498e468-5c96-4d9a-8a65-cbcae82ef70e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/static/angular.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/templates/product_details.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/templates/product_header.html" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\Product_Info.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\pa.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\regForm.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\templates\basicform.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\templates\download.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\templates\hard.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\user_from.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\user_info.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\asa" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\h.cpp" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Azad\Desktop\Software\Projects\myApp\app\Product.py" afterPath="$PROJECT_DIR$/app/auth.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/Thumbs.db" afterPath="$PROJECT_DIR$/app/static/Thumbs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/__init__.py" afterPath="$PROJECT_DIR$/app/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/base.html" afterPath="$PROJECT_DIR$/app/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.py" afterPath="$PROJECT_DIR$/config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db_create.py" afterPath="$PROJECT_DIR$/db_create.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/element_basic.html" afterPath="$PROJECT_DIR$/app/templates/element_basic.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/info_of_product.html" afterPath="$PROJECT_DIR$/app/templates/info_of_product.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install.sh" afterPath="$PROJECT_DIR$/install.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models.py" afterPath="$PROJECT_DIR$/app/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/reg.html" afterPath="$PROJECT_DIR$/app/templates/reg.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/store.html" afterPath="$PROJECT_DIR$/app/templates/store.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -64,8 +39,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.19598" vertical-offset="408" max-vertical-offset="1887">
-              <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.85427135" vertical-offset="51" max-vertical-offset="1887">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -155,6 +130,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Add" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -178,8 +158,8 @@
         <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/install.sh" />
         <option value="$PROJECT_DIR$/app/auth.py" />
-        <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/app/templates/Ajs.html" />
+        <option value="$PROJECT_DIR$/app/views.py" />
       </list>
     </option>
   </component>
@@ -677,6 +657,13 @@
       <option name="number" value="Default" />
       <updated>1427552117551</updated>
     </task>
+    <task id="LOCAL-00001" summary="ok">
+      <created>1427956708860</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1427956708860</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -685,6 +672,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -720,6 +708,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="ok" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1094,8 +1084,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.19598" vertical-offset="408" max-vertical-offset="1887">
-          <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.85427135" vertical-offset="51" max-vertical-offset="1887">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
