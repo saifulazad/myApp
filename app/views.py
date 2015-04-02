@@ -3,7 +3,8 @@ from flask import render_template
 
 import os
 from flask import Flask, url_for, redirect, render_template, request
-# from flask_sqlalchemy import SQLAlchemy
+
+
 # from wtforms import form, fields, validators
 # import flask_admin as admin
 # import flask_login as login
@@ -41,19 +42,11 @@ from  models import *
 #     error = None
 #     return render_template('reg.html', form=form, error=error)
 #
-@app.route('/in')
-def AJS():
-    return render_template("Ajs.html")
-@app.route('/')
-def store():
-    return render_template("store.html")
-
 
 @app.route('/store')
 def index():
     prducts = Product.query.all()
-
-
+    print  prducts
     return render_template("store.html",products = prducts)
 
 
