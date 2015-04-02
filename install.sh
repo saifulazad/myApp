@@ -1,3 +1,4 @@
+python -m pip install flask_admin
 python -m pip install redis
 python -m pip install flask
 python -m pip install flask-login

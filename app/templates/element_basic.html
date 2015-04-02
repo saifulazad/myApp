@@ -3,10 +3,10 @@
   
 <div class="col-md-2 portfolio-item">
     <a href="#">
-        <img class="img-responsive" src="{{ url_for('static', filename =  basic_element.name.lower())+'.jpg' }}" width="100" height="100">
+        <img class="img-responsive" src="{{ url_for('static', filename =  basic_element.product_name.lower())+'.jpg' }}" width="100" height="100">
     </a>
     <h3>
-        <a href="{{ request.path+'/'+basic_element.name }}">{{ basic_element.name }}
+        <a href="{{ request.path+'/'+basic_element.product_name }}">{{ basic_element.product_name }}
         </a>
     </h3>
     <div class="form-group has-error">

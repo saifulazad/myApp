@@ -1,12 +1,13 @@
 
 {% extends "base.html" %}
+{% block title %}Hi Azad{% endblock %}
 {% block content %}
         <!-- /.row -->
 
 {% from "element_basic.html" import render_basic_element_field %}
         <!-- Projects Row -->
-        {% set rows =  basic_info|length //3 %}
-        {% set rem_row =  basic_info|length % 3 %}
+        {% set rows =  products|length //3 %}
+        {% set rem_row =  products|length % 3 %}
         {% set index =  0 %}
         {% set rem_ind =  rows*3 %}
 
@@ -21,7 +22,7 @@
 
             {% for x in range(3) %}
             {% set index = 3*row + x %}
-            {{render_basic_element_field(basic_info[index])}}
+            {{render_basic_element_field(products[index])}}
 
 
             {% endfor %}
@@ -43,7 +44,7 @@
 
 
          {% for x in range(rem_row) %}
-        {{render_basic_element_field(basic_info[rem_ind])}}
+        {{render_basic_element_field(products[rem_ind])}}
         {% set rem_ind = rem_ind + 1 %}
         {% endfor %}
 
@@ -53,12 +54,6 @@
 
        </div>
 
-
-
-
-
-
-    <!-- /.container -->
 
 </body>
 {% endblock %}

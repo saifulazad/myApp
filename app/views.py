@@ -1,123 +1,105 @@
-from flask import *
-from sqlalchemy.util.compat import import_
-from app import app, user_info
-from app import db, models
-from app.Product_Info import Product_information
-from regForm import RegistrationForm, LoginForm
-from db_reg_user import RegUser
-from flask import render_template, flash, redirect, session, url_for, request, g
-from user_info import *
-from Product_Info import *
+from app import app
+from flask import render_template
 
-# from user_info import Userinfo
-
-from functools import wraps
-
-current_user = None
+import os
+from flask import Flask, url_for, redirect, render_template, request
+from flask_sqlalchemy import SQLAlchemy
+from wtforms import form, fields, validators
+import flask_admin as admin
+import flask_login as login
+from flask_admin.contrib import sqla
+from flask_admin import helpers, expose
+from werkzeug.security import generate_password_hash, check_password_hash
+from  models import *
 
 
-@app.before_request
-def before_request():
-    g.user = current_user
-
-
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if g.user is None:
-            error = 'No'
-            form = None
-            return redirect(url_for('login', error=error))
-        return f(*args, **kwargs)
-
-    return decorated_function
-
-
-@app.route('/secret_page')
-@login_required
-def secret_page():
-    form = None
-    error = None
-    return render_template('reg.html', form=form, error=error)
-
-
+# current_user = None
+#
+#
+# @app.before_request
+# def before_request():
+#     g.user = current_user
+#
+#
+# def login_required(f):
+#     @wraps(f)
+#     def decorated_function(*args, **kwargs):
+#         if g.user is None:
+#             error = 'No'
+#             form = None
+#             return redirect(url_for('login', error=error))
+#         return f(*args, **kwargs)
+#
+#     return decorated_function
+#
+#
+# @app.route('/secret_page')
+# @login_required
+# def secret_page():
+#     print  'Hi' + g.user
+#     form = None
+#     error = None
+#     return render_template('reg.html', form=form, error=error)
+#
+@app.route('/in')
+def AJS():
+    return render_template("Ajs.html")
 @app.route('/')
-@app.route('/index')
 def store():
-    return render_template("base.html")
+    return render_template("store.html")
 
 
 @app.route('/store')
 def index():
-
-    all= Product_information()
-
-    rule = request.url_rule
-    basic_info = all.getPrductAllinfo()
-    for x in basic_info:
-        print x.__dict__
- #   print  rule
-    return render_template("store.html",basic_info =basic_info)
+    prducts = Product.query.all()
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm(request.form)
-    error = None
-    if request.method == 'POST' and form.validate():
-        user = Userinfo(email=form.email.data)
-
-        if user.is_matched(form.email.data, form.password.data):
-            session['email'] = form.email.data
-            flash('Thanks for Login')
-            g.user = session['email']
-            print g.user
-            return redirect(url_for('index'))
-        else:
-            error = 'Invalid email or password'
-            return render_template('login.html', form=form, error=error)
-    return render_template('login.html', form=form, error=error)
+    return render_template("store.html",products = prducts)
 
 
-@app.route('/form')
-def form():
-    return render_template('form.html')
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     form = LoginForm(request.form)
+#     error = None
+#     if request.method == 'POST' and form.validate():
+#         user = Userinfo(email=form.email.data)
+#
+#         if user.is_matched(form.email.data, form.password.data):
+#             session['email'] = form.email.data
+#             flash('Thanks for Login')
+#             g.user = session['email']
+#             print g.user
+#             return redirect(url_for('index'))
+#         else:
+#             error = 'Invalid email or password'
+#             return render_template('login.html', form=form, error=error)
+#     return render_template('login.html', form=form, error=error)
 
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm(request.form)
-    error = None
-    if request.method == 'POST' and form.validate():
-        new_user = RegUser()
-
-        is_contain = new_user.already_exist(email=form.email.data, \
-                                            user_name=form.username.data, password=form.password.data)
-        if (is_contain == True):
-            error = 'User name or email already exist'
-            return render_template('reg.html', form=form, error=error)
-        flash('Thanks for registering')
-        return redirect(url_for('login'))
-    return render_template('reg.html', form=form, error=error)
-
+#
+# @app.route('/form')
+# def form():
+#     return render_template('form.html')
+#
+#
+# @app.route('/register', methods=['GET', 'POST'])
+# def register():
+#     form = RegistrationForm(request.form)
+#     error = None
+#     if request.method == 'POST' and form.validate():
+#         new_user = RegUser()
+#
+#         is_contain = new_user.already_exist(email=form.email.data, \
+#                                             user_name=form.username.data, password=form.password.data)
+#         if (is_contain == True):
+#             error = 'User name or email already exist'
+#             return render_template('reg.html', form=form, error=error)
+#         flash('Thanks for registering')
+#         return redirect(url_for('login'))
+#     return render_template('reg.html', form=form, error=error)
 
 @app.route('/store/<productname>')
 def user(productname):
+    product = Product.query.filter_by(product_name=productname).first()
 
-  #  print  productname
-    return render_template('info_of_product.html')
-'''
 
-    user = User.query.filter_by(productname=productname).first()
-    if user == None:
-        flash('User %s not found.' % productname)
-        return redirect(url_for('index'))
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user.html',
-                           user=user,
-                           posts=post)
-
-'''
+    return render_template('info_of_product.html', prduc=product)
