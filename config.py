@@ -2,7 +2,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:Azad@localhost:9000/dbname'
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:Azad@localhost:5432/dbname'
 SECRET_KEY = 'Sm9obiBTY2hyb20ga2lja3MgYXNz'
 basedir = os.path.abspath(os.path.dirname(__file__))
 

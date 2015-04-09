@@ -22,7 +22,7 @@
 
             {% for x in range(3) %}
             {% set index = 3*row + x %}
-            {{render_basic_element_field(products[index])}}
+            {{ render_basic_element_field(products[index]) }}
 
 
             {% endfor %}
@@ -55,5 +55,4 @@
        </div>
 
 
-</body>
 {% endblock %}
