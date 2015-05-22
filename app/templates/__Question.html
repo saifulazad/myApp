@@ -1,32 +1,4 @@
 {% macro render_question(question) %}
 
-<div class="question">
-	<strong>Q1.</strong>{{ question.description }}
-</div>
-<div class="options">
-	<div class="radio">
-		<label>
-			<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-				{{ question.option1 }}
-		</label>
-	</div>
-	<div class="radio">
-		<label>
-			<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-				{{ question.option2 }}
-		</label>
-	</div>
-	<div class="radio">
-		<label>
-			<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-				{{ question.option3 }}
-		</label>
-	</div>
-	<div class="radio">
-		<label>
-			<input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
-				 {{ question.option4 }}
-		</label>
-	</div>
-</div>
+
 {% endmacro %}

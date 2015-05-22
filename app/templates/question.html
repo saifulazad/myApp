@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% from "__Question.html" import render_question%}
 {% block content %}
 {#<div class="layer1">#}
 {#	<ul class="pagination">#}
@@ -12,12 +11,49 @@
 {#		<li><a href="#">&raquo;</a></li>#}
 {#	</ul>#}
 {#</div>#}
-{{ render_question(question) }}
-<div class="navigation">
-<ul class="pager">
-{#  <li class="previous"><a href="#">&larr; Previous</a></li>#}
 
-  <li class="next"><a href="#">Next &rarr;</a></li>
-</ul>
+
+    <div class="col-lg-12">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+
+            <div class="question">
+	<strong>Q{{ question.questionID }}.</strong>{{ question.description }}
 </div>
+
+    <form method="post" action={{ path }}>
+         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="options">
+	<div class="radio">
+		<label>
+			<input type="radio" name="option1" id="optionsRadios1" value={{ question.option1 }}>
+				{{ question.option1 }}
+		</label>
+	</div>
+	<div class="radio">
+		<label>
+			<input type="radio" name="option1" id="optionsRadios2" value={{ question.option2 }}>
+				{{ question.option2 }}
+		</label>
+	</div>
+	<div class="radio">
+		<label>
+			<input type="radio" name="option1" id="optionsRadios3" value={{ question.option3 }}>
+				{{ question.option3 }}
+		</label>
+	</div>
+	<div class="radio">
+		<label>
+			<input type="radio" name="option1" id="optionsRadios4" value={{ question.option4 }}>
+				 {{ question.option4 }}
+		</label>
+	</div>
+            </div>
+         <button type="submit"  value=ans class="btn pull-right">Next</button>
+
+    </form>
+</div>
+
+    <div class="col-md-3"></div>
+    </div>
 {% endblock %}

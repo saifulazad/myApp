@@ -1,10 +1,15 @@
-from app import app
+from wtforms import form
+from app import app, csrf
 from flask import render_template, request
 
-
+from  QuestionAns import *
 from UploadQuestion import *
 from  models import *
 
+@csrf.error_handler
+def csrf_error(reason):
+    return render_template('csrf_error.html', reason=reason), 400
+@app.route('/next')
 @app.route('/')
 def index():
     return render_template("base.html")
@@ -18,20 +23,36 @@ def Question():
 
     return render_template('question.html', question=question)
 
-@app.route('/questions/<id>')
+@app.route('/questions/<id>', methods=['GET', 'POST'])
 def QuestionID(id):
-
 
     question = Questions.query.filter_by(questionID=id).first()
 
+    root_path =  str(request.path).rsplit('/',1)[0]
 
+    user_value = request.form.getlist('option1')
+    if( len(user_value)):
+        print  user_value[0]
+    print  question.correctAnswer
+    ln = len(Questions.query.all())
+    path = '/'.join([root_path,str(int(id)%ln+1)])
 
-    return render_template('question.html', question=question)
+    print  path
+    str(1)
+
+    return render_template('question.html',question=question ,path=path)
 # @app.route('/questions/<questionsID>')
 # def user(questionsID):
 #     product = Product.query.filter_by(product_name=questionsID).first()
 #     return render_template('info_of_product.html', prduc=product)
 
+
+@app.route('/r')
+def hello_world():
+    testform = TestForm()
+
+    print  testform.option1.data
+    return render_template('redio.html', form=testform)
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     form = QuestionForm(request.form)
