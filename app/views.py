@@ -2,7 +2,6 @@ from wtforms import form
 from app import app, csrf
 from flask import render_template, request
 
-from  QuestionAns import *
 from UploadQuestion import *
 from  models import *
 
@@ -47,12 +46,12 @@ def QuestionID(id):
 #     return render_template('info_of_product.html', prduc=product)
 
 
-@app.route('/r')
-def hello_world():
-    testform = TestForm()
-
-    print  testform.option1.data
-    return render_template('redio.html', form=testform)
+# @app.route('/r')
+# def hello_world():
+#     testform = TestForm()
+#
+#     print  testform.option1.data
+#     return render_template('redio.html', form=testform)
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     form = QuestionForm(request.form)
