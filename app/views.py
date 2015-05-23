@@ -17,7 +17,7 @@ def index():
 @app.route('/questions', methods=['GET', 'POST'])
 def Question():
 
-    question = Questions.query.all()
+    question = Questiontable.query.all()
     question = question[0]
 
 
@@ -26,7 +26,7 @@ def Question():
 @app.route('/questions/<id>', methods=['GET', 'POST'])
 def QuestionID(id):
 
-    question = Questions.query.filter_by(questionID=id).first()
+    question = Questiontable.query.filter_by(questionID=id).first()
 
     root_path =  str(request.path).rsplit('/',1)[0]
 
@@ -34,7 +34,7 @@ def QuestionID(id):
     if( len(user_value)):
         print  user_value[0]
     print  question.correctAnswer
-    ln = len(Questions.query.all())
+    ln = len(Questiontable.query.all())
     path = '/'.join([root_path,str(int(id)%ln+1)])
 
     print  path
@@ -60,7 +60,7 @@ def upload():
     if request.method == 'POST' and form.validate_on_submit():
 
 
-        question = Questions(description =form.description.data, category = form.category.data,
+        question = Questiontable(description =form.description.data, category = form.category.data,
                 option1 = form.option1.data,    option2 = form.option2.data,
                 option3 = form.option3.data,    option4 = form.option4.data,
                 correctAnswer = form.correctAnswer.data)

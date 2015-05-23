@@ -15,7 +15,7 @@ class Product(db.Model):
         return '<product_name %r price %r amount  %r>' % (self.product_name, self.price,self.amount)
 
 #create Question model
-class Questions (db.Model):
+class Questiontable (db.Model):
     questionID = db.Column(db.Integer,primary_key=True)
     description = db.Column(db.String(300))
     category = db.Column(db.String(100))
