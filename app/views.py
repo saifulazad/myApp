@@ -1,4 +1,4 @@
-from wtforms import form
+
 from app import app, csrf
 from flask import render_template, request
 
@@ -70,12 +70,8 @@ def QuestionID(id):
 #         # flash('Thanks for registering')
 #         # return redirect(url_for('login'))
 #
-#
+#       #
 #     return render_template('reg.html', form=form)
-
-
-
-
 
 
 
