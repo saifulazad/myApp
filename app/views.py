@@ -46,6 +46,45 @@ def QuestionID(id):
 #     return render_template('info_of_product.html', prduc=product)
 
 
+
+#
+# def register():
+#     form = RegistrationForm(request.form)
+#
+#     if request.method == 'POST' and form.validate_on_submit():
+#
+#
+#         print form.catalogue_name.data
+#         print form.price.data
+#         print form.dressid.data
+#         print form.catalogue_company.data
+#
+#         new_product = Product_details(dressid= form.dressid.data, catalogue =form.catalogue.data,
+#                 catalogue_name=form.catalogue_name.data,price= form.price.data,
+#                 quantity=form.quantity.data, catalogue_company=form.catalogue_company.data,
+#                 color=form.color.data,category= form.category.data
+#                 )
+#
+#         db.session.add(new_product)
+#         db.session.commit()
+#         # flash('Thanks for registering')
+#         # return redirect(url_for('login'))
+#
+#
+#     return render_template('reg.html', form=form)
+
+
+
+
+
+
+
+
+
+
+
+
+
 # @app.route('/r')
 # def hello_world():
 #     testform = TestForm()
@@ -72,28 +111,3 @@ def upload():
 
 
     return render_template('upload.html', form=form)
-#
-# def register():
-#     form = RegistrationForm(request.form)
-#
-#     if request.method == 'POST' and form.validate_on_submit():
-#
-#
-#         print form.catalogue_name.data
-#         print form.price.data
-#         print form.dressid.data
-#         print form.catalogue_company.data
-#
-#         new_product = Product_details(dressid= form.dressid.data, catalogue =form.catalogue.data,
-#                 catalogue_name=form.catalogue_name.data,price= form.price.data,
-#                 quantity=form.quantity.data, catalogue_company=form.catalogue_company.data,
-#                 color=form.color.data,category= form.category.data
-#                 )
-#
-#         db.session.add(new_product)
-#         db.session.commit()
-#         # flash('Thanks for registering')
-#         # return redirect(url_for('login'))
-#
-#
-#     return render_template('reg.html', form=form)
