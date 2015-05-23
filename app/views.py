@@ -70,7 +70,7 @@ def QuestionID(id):
 #         # flash('Thanks for registering')
 #         # return redirect(url_for('login'))
 #
-#       #
+#
 #     return render_template('reg.html', form=form)
 
 
