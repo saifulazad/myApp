@@ -21,7 +21,7 @@
 	<strong>Q{{ question.questionID }}.</strong>{{ question.description }}
 </div>
 
-    <form method="post" action={{ path }}>
+    <form method="post" action='/submit'>
          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="options">
 	<div class="radio">
