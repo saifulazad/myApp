@@ -1,9 +1,8 @@
 __author__ = 'root'
-from flask.ext.wtf import Form
-from wtforms import Form, StringField,IntegerField, validators
 from wtforms import *
 from flask.ext.wtf import Form
-from wtforms.validators import DataRequired
+
+
 class Login(Form):
     email = StringField('email', [validators.Length( max=25)])
     password = PasswordField('password', [validators.Length( max=25)])
