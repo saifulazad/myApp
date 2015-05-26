@@ -3,51 +3,94 @@
 
 {% block content %}
 
-  <body>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for category, message in messages %}
+              <li class="{{ category }}"><strong>Error:{{ category }}</strong> {{ message }}</li>
+            {% endfor %}
+            </ul>
+
+
+               <form method="post" action="{{ url_for('Register') }}">
+                {{ form.csrf_token}}
+                <input type="button" value="Back" class="btn pull-right">Back</
+              </form>
+
+
+          {% else %}
+
+
+
+    <body xmlns="http://www.w3.org/1999/html">
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
 			  <br>
 
-                <form method="post" action="{{ url_for('register') }}">
-					<div class="form-group">
-						<label for="exampleInputName2">Name</label>
-						<input type="text" class="form-control" name="username" placeholder="Name">
-						{{ render_field(form.username) }}
+                <form method="post" action="{{ url_for('Register') }}">
+                {{ form.csrf_token}}
+
+                  <div class="form-group">
+
+						<input type="text" class="form-control" name="Name" placeholder="Name">
+						{{ render_field(form.Name) }}
+
+
 					</div>
-					<div class="form-group">
-						<label for="exampleInputName2">Email</label>
-						<input type="text" class="form-control" name="email" placeholder="Email">
-						{{ render_field(form.email) }}
-						
-					
+
+                 <div class="form-group">
+						<input type="text" class="form-control" name="Email" placeholder="Email">
+						{{ render_field(form.Email) }}
+
+
 					</div>
-					
-					<div class="form-group">
-						<label for="exampleInputName2">Password</label>
-						<input type="password" class="form-control" name="password" placeholder="Password">
-						{{ render_field(form.password) }}
-						
-					
+
+
+
+                    <div class="form-group">
+
+						<input type="text" class="form-control" name="User_Id" placeholder="User Id">
+						{{ render_field(form.User_Id) }}
+
+
 					</div>
-					<div class="form-group">
-						<label for="exampleInputName2">Confirm Password</label>
-						<input type="password" class="form-control" name="confirm" placeholder="Confirm Password">
-						{{ render_field(form.confirm) }}
-						
-					
+                    <div class="form-group">
+
+						<input type="text" class="form-control" name="Institute" placeholder="Institute">
+						{{ render_field(form.Institute) }}
+
+
 					</div>
+
+                    <div class="form-group">
+
+						<input type="text" class="form-control" name="Password" placeholder="Password">
+						{{ render_field(form.Password) }}
+
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" name="Confirm" placeholder="Confirm Password">
+						{{ render_field(form.Confirm) }}
+					</div>
+
+
+
 					{% if error %}
-						
+
 						 <div class="alert alert-danger" role="alert"><li>{{ error }}</li></div>
-						
+
 					{% endif %}
-					
-					<button type="submit" class="btn pull-right">Submit</button>
+					<button type="submit"  value=Register class="btn pull-right">Submit</button>
 				</form>
 			</div>
 			<div class="col-md-4"></div>
 		</div>
 
 	</body>
+
+    {% endif %}
+        {% endwith %}
 {% endblock %}
