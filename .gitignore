@@ -2,3 +2,5 @@
 *.xml
 *.pyo
 *~
+question.db
+.idea/*
