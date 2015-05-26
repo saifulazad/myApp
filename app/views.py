@@ -1,9 +1,11 @@
 
 from app import app, csrf
-from flask import render_template, session,request, url_for ,redirect
+from flask import render_template, session,request, url_for ,redirect,flash
 import  random
 from UploadQuestion import *
 from  models import *
+from sqlalchemy import distinct
+from sqlalchemy.exc import IntegrityError
 
 @csrf.error_handler
 def csrf_error(reason):
@@ -38,9 +40,16 @@ def Next():
 @app.route('/questions', methods=['GET', 'POST'])
 def Question():
 
-    question = Questiontable.query.all()
-    ln = len(question)
 
+    question = Questiontable.query.all()
+    question_category=[]
+
+    for category in db.session.query(Questiontable.category).distinct():
+        question_category.extend(category)
+
+
+
+    ln = len(question)
 
     question_list = random.sample(range(1, ln), 10)
 
@@ -48,7 +57,10 @@ def Question():
     question = Questiontable.query.filter_by(questionID=question_list[0]).first()
 
     session["question_list_point"] = 0
-    return render_template('question.html', question=question)
+    return render_template('question.html', question=question ,question_list=question_list ,
+                           question_category=question_category)
+
+
 
 @app.route('/questions/<id>', methods=['GET', 'POST'])
 def QuestionID(id):
@@ -103,8 +115,36 @@ def QuestionID(id):
 
 
 
+# route to showcategory
+
+@app.route('/categoryshow',methods=['GET', 'POST'])
+def Category():
+
+   categorylist= request.form.getlist('category')
+   print  categorylist
+   return render_template("categoryshow.html",categorylist=categorylist)
 
 
+
+# route to register
+
+@app.route('/reg', methods=['GET', 'POST'])
+def Register():
+
+    form = RegisterForm(request.form)
+    if request.method == 'POST' and form.validate_on_submit():
+        user = Registertable(name =form.Name.data, email = form.Email.data,
+                userID = form.User_Id.data,    institute = form.Institute.data,
+                password = form.Password.data)
+
+        try:
+            db.session.add(user)
+            db.session.commit()
+            flash('Thanks for registering')
+        except IntegrityError:
+            flash(u'Email Exist', '')
+
+    return render_template('reg.html',form=form)
 
 
 

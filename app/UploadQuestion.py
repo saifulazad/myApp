@@ -1,6 +1,7 @@
 __author__ = 'root'
 from wtforms import *
 from flask.ext.wtf import Form
+from wtforms.fields.html5 import EmailField
 
 
 class Login(Form):
@@ -22,3 +23,20 @@ class QuestionForm(Form):\
     option4 = StringField('option4', [validators.Length( max=35)])
 
     correctAnswer = StringField('correctAnswer', [validators.Length( max=25)])
+
+
+
+class RegisterForm(Form):\
+
+    Name = StringField('Name', [validators.Length(min = 3, max=175)])
+
+    Email = EmailField('Email', [validators.Length( max=35), validators.Email()])
+
+    User_Id = StringField('User_Id', [validators.Length(min=4, max=25)])
+
+    Institute = StringField('Institute', [validators.Length(min=4, max=35)])
+
+    Password = PasswordField('Password', [validators.Length(min=4, max=35), validators.EqualTo('Confirm', message='Passwords must match')])
+
+    Confirm = PasswordField('Confirm Password', [validators.Length(min=4, max=35)])
+

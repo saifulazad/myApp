@@ -24,3 +24,12 @@ class Questiontable (db.Model):
     option3 = db.Column(db.String(100))
     option4 = db.Column(db.String(100))
     correctAnswer = db.Column(db.String(100))
+
+
+class Registertable (db.Model):
+    ID = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(300))
+    email = db.Column(db.String(100), unique=True)
+    userID = db.Column(db.String(300),unique=True)
+    institute = db.Column(db.String(100))
+    password = db.Column(db.String(100))
