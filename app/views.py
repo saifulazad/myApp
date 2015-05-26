@@ -92,7 +92,7 @@ def QuestionID(id):
 #                 quantity=form.quantity.data, catalogue_company=form.catalogue_company.data,
 #                 color=form.color.data,category= form.category.data
 #                 )
-#           this is a test
+#
 #         db.session.add(new_product)
 #         db.session.commit()
 #         # flash('Thanks for registering')
