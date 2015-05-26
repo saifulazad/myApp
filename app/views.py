@@ -1,11 +1,24 @@
 
 from app import app, csrf
-from flask import render_template, session,request, url_for ,redirect,flash
+from flask import render_template, session,request, url_for ,redirect
 import  random
 from UploadQuestion import *
 from  models import *
-from sqlalchemy import distinct
-from sqlalchemy.exc import IntegrityError
+def ComputeResult(categories , booleanAns):
+    result = []
+    category = list(set(categories))
+    print category
+    assoc_answer=zip(categories,booleanAns)
+    print assoc_answer
+    for y in category:
+        print  y
+
+        total  = len([x for x in str(assoc_answer) if x[0]==y])
+        total_correct  = len([x for x in assoc_answer if x[0]==y] and x[1]==1)
+        print total
+        percent = total_correct/1 * 100.0
+        result.append((y,percent))
+    return result
 
 @csrf.error_handler
 def csrf_error(reason):
@@ -22,45 +35,47 @@ def index():
 
 @app.route('/submit', methods=['GET', 'POST'])
 def Next():
+    question_list = session["question_list"]
+    question = Questiontable.query.filter_by(questionID=question_list[0]).first()
+    user_value = request.form.getlist('option1')
+    print question.correctAnswer
+    if( len(user_value)):
+        if (user_value[0] == question.correctAnswer):
+            print "well done"
+            session["answerList"].append(1)
+        else:
+            session["answerList"].append(0)
 
+    print(session["answerList"])
     session["question_list_point"]+=1
-
     question_list = session["question_list"]
     if(len(session["question_list"])>session["question_list_point"]):
 
         question_no = question_list[session["question_list_point"]]
-
         question = Questiontable.query.filter_by(questionID=question_no).first()
         return  render_template('question.html',question=question )
         #return  redirect(url_for('/questions/'+ str(session["question_list_point"])))
     else:
-
-        return render_template("base.html")
+        result = ComputeResult(session["question_cat_list"],session["answerList"])
+        #session["result"] = [('Verb',20,'danger'),('Tense',60,'success'),('hello',80,'success'),('world',40,'danger'),('test',70,'success')]
+        return render_template("result.html",result=result)
 
 @app.route('/questions', methods=['GET', 'POST'])
 def Question():
 
-
-    question = Questiontable.query.all()
-    question_category=[]
-
-    for category in db.session.query(Questiontable.category).distinct():
-        question_category.extend(category)
-
-
-
-    ln = len(question)
-
-    question_list = random.sample(range(1, ln), 10)
-
+    questions = Questiontable.query.all()
+    ln = len(questions)
+    categories = [x.category for x in questions]
+#    category =set(categories)
+ #   for (cat in category):
+    session["answerList"] = []
+    question_list = random.sample(range(1, ln), 3)
     session["question_list"] = question_list
     question = Questiontable.query.filter_by(questionID=question_list[0]).first()
-
+    category = question.category
+    print(category)
     session["question_list_point"] = 0
-    return render_template('question.html', question=question ,question_list=question_list ,
-                           question_category=question_category)
-
-
+    return render_template('question.html', question=question)
 
 @app.route('/questions/<id>', methods=['GET', 'POST'])
 def QuestionID(id):
@@ -115,36 +130,8 @@ def QuestionID(id):
 
 
 
-# route to showcategory
-
-@app.route('/categoryshow',methods=['GET', 'POST'])
-def Category():
-
-   categorylist= request.form.getlist('category')
-   print  categorylist
-   return render_template("categoryshow.html",categorylist=categorylist)
 
 
-
-# route to register
-
-@app.route('/reg', methods=['GET', 'POST'])
-def Register():
-
-    form = RegisterForm(request.form)
-    if request.method == 'POST' and form.validate_on_submit():
-        user = Registertable(name =form.Name.data, email = form.Email.data,
-                userID = form.User_Id.data,    institute = form.Institute.data,
-                password = form.Password.data)
-
-        try:
-            db.session.add(user)
-            db.session.commit()
-            flash('Thanks for registering')
-        except IntegrityError:
-            flash(u'Email Exist', '')
-
-    return render_template('reg.html',form=form)
 
 
 
