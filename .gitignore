@@ -1,9 +1,6 @@
 *.pyc
-*.xml
 *.pyo
 *~
-*.xml
-question.db
-*.xml
 *.db
-.idea/workspace.xml
+*.db
+.idea/
