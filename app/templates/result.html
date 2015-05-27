@@ -10,8 +10,8 @@
             <tr>
                 <th>Category</th><th>Percentage Correct</th>
             </tr>
-            {% for category,percentage in result %}
-                <tr><td>{{ category }}</td><td>{{ percentage }}%</td></tr>
+            {% for category,percentage,color in result %}
+                <tr class="{{ color }}"><td>{{ category }}</td><td>{{ percentage }}%</td></tr>
             {% endfor %}
         </table>
 

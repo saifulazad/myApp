@@ -1,11 +1,13 @@
 
 from app import app, csrf
 from flask import render_template, session,request
-import  random
+import random
 from UploadQuestion import *
-from  models import *
+from models import *
+from profile import *
 def ComputeResult(categories , booleanAns):
     result = []
+    color = []
     category = list(set(categories))
     print category
     assoc_answer=zip(categories,booleanAns)
@@ -18,7 +20,11 @@ def ComputeResult(categories , booleanAns):
         total_correct  = len([x for x in assoc_answer if x[0]==y and x[1]==1] )
        # print total
         percent = total_correct* 100.0/float(total)
-        result.append((y,percent))
+        if (percent > 50):
+            color='success'
+        else:
+            color='danger'
+        result.append((y,percent,color))
     return result
 
 @csrf.error_handler
@@ -33,6 +39,16 @@ def csrf_error(reason):
 def index():
     return render_template("base.html")
 
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+#    form = UserProfile(request.form)
+#   generating random numbers
+    solved=random.sample(range(1, 100), 13)
+    tried=random.sample(range(1, 100), 23)
+    user = UserProfile('Tanvir','abcd',solved,tried)
+    user=['Tanvir','abcd']
+    session["user"]=user
+    return render_template('profile.html', user=user,solved=solved,tried=tried)
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -104,7 +120,6 @@ def Question():
     # print category
     session["question_list_point"] = 0
     return render_template('question.html', question=question)
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
