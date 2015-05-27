@@ -2,7 +2,7 @@
 *.xml
 *.pyo
 *~
-
+.idea/
 question.db
 *.xml
 *.db
