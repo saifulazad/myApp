@@ -1,9 +1,10 @@
 
 from app import app, csrf
 from flask import render_template, session,request
-import  random
+import random
 from UploadQuestion import *
-from  models import *
+from models import *
+from profile import *
 def ComputeResult(categories , booleanAns):
     result = []
     category = list(set(categories))
@@ -33,6 +34,15 @@ def csrf_error(reason):
 def index():
     return render_template("base.html")
 
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+#    form = UserProfile(request.form)
+    solved=random.sample(range(1, 100), 13)
+    tried=random.sample(range(1, 100), 23)
+    user = UserProfile('Tanvir','abcd',solved,tried)
+    user=['Tanvir','abcd']
+    session["user"]=user
+    return render_template('profile.html', user=user,solved=solved,tried=tried)
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -104,7 +114,6 @@ def Question():
     # print category
     session["question_list_point"] = 0
     return render_template('question.html', question=question)
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+{#<head>
+	<style type="html/css">
+		#left{
+			width:auto;max-width:inherit;
+			overflow:hidden;float:left;position:absolute;
+		}
+		#right{
+			width:10px;
+			overflow:hidden;float:right;margin-left:40px;
+		}
+	</style>
+</head>#}
+<body xmlns="http://www.w3.org/1999/html">
+<div class="col-lg-12">
+    <div class="col-md-3">
+        <div class="photo" id="left">
+                <img src="image.jpg" alt="photo" class="img-thumbnail">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel-heading">
+            <h3 class="panel-title">User Profile</h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel panel-default" id="right">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User Info</h3>
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>Name</dt><dd>{{ user.name }}</dd>
+                        <dt>School</dt><dd>{{ user.school }}</dd>
+                        <dt>Problems Solved</dt><dd>{{ solved.__len__() }}</dd>
+                        <dt>Problems Attempted</dt><dd>{{ tried.__len__() }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Problems Solved</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-pills">
+                    {% for ques in solved %}
+                    <li><a href="#">{{ ques }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Problems Attempted</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-pills">
+                    {% for ques in tried %}
+                    <li><a href="#">{{ ques }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+{% endblock %}

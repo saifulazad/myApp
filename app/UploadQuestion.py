@@ -11,20 +11,23 @@ class Login(Form):
 class QuestionForm(Form):\
 
     description = StringField('description', [validators.Length(min = 3, max=175)])
-
     category = StringField('category', [validators.Length( max=35)])
-
     option1 = StringField('option1', [validators.Length( max=25)])
-
     option2 = StringField('option2', [validators.Length( max=35)])
-
     option3 = StringField('option3', [validators.Length( max=35)])
-
     option4 = StringField('option4', [validators.Length( max=35)])
-
     correctAnswer = StringField('correctAnswer', [validators.Length( max=25)])
 
-
+class UserProfile(Form):
+    Name = StringField('Name', [validators.Length(min = 3, max=175)])
+    User_Id = StringField('User_Id', [validators.Length(min=4, max=25)])
+    School = StringField('School', [validators.Length(min = 3, max=175)])
+    Class = IntegerField('Class')
+    def __init__(self,name,school,solved,tried):
+        self.Name=name
+        self.School=school
+        self.solved=solved
+        self.tried=tried
 
 class RegisterForm(Form):\
 
