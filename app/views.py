@@ -113,7 +113,7 @@ def Question():
 
     session["answerList"] = []
     session["question_cat_list"] = []
-    question_list = random.sample(range(1, ln), 3)
+    question_list = random.sample(range(1, ln), 40)
     session["question_list"] = question_list
     question = Questiontable.query.filter_by(questionID=question_list[0]).first()
     category = question.category
@@ -158,6 +158,37 @@ def user(questionsID):
     question = Questiontable.query.filter_by(questionID=questionsID).first()
     return render_template('question.html', question=question)
 
+
+
+# route to register
+
+@app.route('/reg', methods=['GET', 'POST'])
+def Register():
+
+    caps = Captcha.query.all()
+
+
+    cap_img = [caps[random.randrange(0,2)] for x in range(3)]
+    d = []
+    for x in cap_img:
+        d.append ((x.ID , x.src))
+    cap_img =  d
+    #return render_template("captcha.html",cap_img=d)
+
+
+    form = RegisterForm(request.form)
+    if request.method == 'POST' and form.validate_on_submit():
+        user_value = request.form.getlist('captcha')
+        print user_value
+        user = Registertable(name =form.Name.data, email = form.Email.data,
+                userID = form.User_Id.data,    institute = form.Institute.data,
+                password = form.Password.data)
+
+
+        db.session.add(user)
+        db.session.commit()
+
+    return render_template('reg.html',form=form,cap_img=cap_img )
 
 
 

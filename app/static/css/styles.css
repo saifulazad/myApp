@@ -1,50 +1,21 @@
-@media screen and (min-width: 992px) {
-  .the-icons li {
-    width: 12.5%;
-  }
-}
-  
-.the-buttons > li {
-  float: left;
-  height: 80px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  font-size: 12px;
-  line-height: 1.25;
-  text-align: center;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0 -1px -1px 0;
-}
-  
-.the-icons .glyphicon {
-  display: block;
-  margin: 5px auto;
-  vertical-align: middle;
-  margin-right: 3px;
-  font-size: 24px;
+
+html, body {
+  height: 100%;
 }
 
-.the-icons li {
-  float: left;
-  width: 100px;
-  height: 110px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  font-size: 12px;
-  line-height: 1.25;
-  text-align: center;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0 auto;
+#wrap {
+  min-height: 100%;
 }
 
-.the-icons, .the-buttons {
-	list-style:none;
+#main {
+  overflow:auto;
+  padding-bottom:150px; /* this needs to be bigger than footer height*/
 }
 
-.the-icons .glyphicon {
-	display:inline;
+.footer {
+  position: relative;
+  margin-top: -150px; /* negative value of footer height */
+  height: 150px;
+  clear:both;
+  padding-top:20px;
 }

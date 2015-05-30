@@ -33,3 +33,9 @@ class Registertable (db.Model):
     userID = db.Column(db.String(300),unique=True)
     institute = db.Column(db.String(100))
     password = db.Column(db.String(100))
+
+
+
+class Captcha (db.Model):
+    ID = db.Column(db.Integer,primary_key=True)
+    src = db.Column(db.String(300))

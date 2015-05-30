@@ -1,0 +1,14 @@
+{% macro render_captchafield(cap_img) %}
+
+  
+  {% for img in cap_img %}
+        <img src="{{ img[1] }}" width="50" height="50">
+        <select name="captcha">
+        <option value="{{ img[0] }}">ক</option>
+        <option value="{{ img[0] }}">খ</option>
+        <option value="{{ img[0] }}">গ</option>
+
+      </select>
+    {% endfor %}
+  
+{% endmacro %}

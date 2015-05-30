@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% from "_captcha.html" import render_captchafield %}
+<body>
+
+    {{ render_captchafield(cap_img) }}
+    <form action="{{ url_for('index') }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <input type="submit" value="Refresh">
+      <input type="submit" value="Submit">
+    </form>
+
+
+
+</body>

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from "_formhelpers.html" import render_field %}
+{% from "_captcha.html" import render_captchafield %}
 
 {% block content %}
 
@@ -78,16 +79,21 @@
 
 
 
+                     {{ render_captchafield(cap_img) }}
 					{% if error %}
 
 						 <div class="alert alert-danger" role="alert"><li>{{ error }}</li></div>
 
 					{% endif %}
+
+
 					<button type="submit"  value=Register class="btn pull-right">Submit</button>
 				</form>
 			</div>
 			<div class="col-md-4"></div>
 		</div>
+
+
 
 	</body>
 
