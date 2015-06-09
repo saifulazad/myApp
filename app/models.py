@@ -1,19 +1,29 @@
 from app import db
 
-# class Product(db.Model):
-#
-#     id = db.Column(db.Integer , primary_key=True)
-#
-#     product_name = db.Column(db.String(120), index=True , unique=True,nullable = False)
-#
-#     price = db.Column(db.Integer,nullable = False)
-#
-#     amount = db.Column(db.Integer, nullable = False)
-#
-#
-#     def __repr__(self):
-#         return '<product_name %r price %r amount  %r>' % (self.product_name, self.price,self.amount)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(100))
+    last_name = db.Column(db.String(100))
+    login = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(120))
+    password = db.Column(db.String(64))
 
+    # Flask-Login integration
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.id
+
+    # Required for administrative interface
+    def __unicode__(self):
+        return self.username
 #create Question model
 class Questiontable (db.Model):
     questionID = db.Column(db.Integer,primary_key=True)
@@ -33,7 +43,25 @@ class Registertable (db.Model):
     userID = db.Column(db.String(300),unique=True)
     institute = db.Column(db.String(100))
     password = db.Column(db.String(100))
+    # Flask-Login integration
+    def is_authenticated(self):
+        return True
 
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.ID
+
+    # Required for administrative interface
+    def __unicode__(self):
+        return self.name
+    def check_password(self, password):
+
+	return password == self.password
 
 
 class Captcha (db.Model):

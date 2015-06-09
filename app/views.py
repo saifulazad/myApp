@@ -1,10 +1,14 @@
 
-from app import app, csrf
+from app import app, csrf,login_manager
 from flask import render_template, session,request
 import random
+from flask.ext.login import login_user , logout_user , current_user , login_required
 from UploadQuestion import *
 from models import *
 from profile import *
+@login_manager.user_loader
+def load_user(id):
+    return Registertable.query.get(int(id))
 def ComputeResult(categories , booleanAns):
     result = []
     color = []
@@ -51,6 +55,7 @@ def profile():
     return render_template('profile.html', user=user,solved=solved,tried=tried)
 
 @app.route('/upload', methods=['GET', 'POST'])
+@login_required
 def upload():
     form = QuestionForm(request.form)
 
@@ -123,16 +128,22 @@ def Question():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = Login(request.form)
+    form = Login(request.form , "Aaas")
 # #
     print request.method
     if request.method == 'POST' and form.validate_on_submit():
+	login_user(form.user)
+	print form.user.email
         return render_template('base.html')
         pass
     #print request.method
     return render_template('login.html' , form =form)
 
-
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return render_template("base.html")
 #
 # @app.route('/questions/<id>', methods=['GET', 'POST'])
 # def QuestionID(id):

@@ -2,11 +2,62 @@ __author__ = 'root'
 from wtforms import *
 from flask.ext.wtf import Form
 from wtforms.fields.html5 import EmailField
-
+from models import *
 
 class Login(Form):
-    email = StringField('email', [validators.Length( max=25)])
+    email = StringField('email', [validators.Length(min =2, max=25)])
     password = PasswordField('password', [validators.Length( max=25)])
+    
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.user = None
+   
+    def validate(self):
+	
+        rv = Form.validate(self)
+        if not rv:
+            return False
+       
+        user = Registertable.query.filter_by(
+            email=self.email.data).first()
+     
+        if user is None:
+            self.email.errors.append('Unknown username')
+            return False
+	
+        if not user.check_password(self.password.data):
+            self.password.errors.append('Invalid password')
+            return False
+	
+        self.user = user
+	
+        return True 
+
+class LoginForm(Form):
+    username = TextField('Username', [validators.Required()])
+    password = PasswordField('Password', [validators.Required()])
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.user = None
+
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
+
+        user = User.query.filter_by(
+            username=self.username.data).first()
+        if user is None:
+            self.username.errors.append('Unknown username')
+            return False
+
+        if not user.check_password(self.password.data):
+            self.password.errors.append('Invalid password')
+            return False
+
+        self.user = user
+        return True
 
 class QuestionForm(Form):\
 
