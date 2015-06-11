@@ -94,3 +94,28 @@ class RegisterForm(Form):\
 
     Confirm = PasswordField('Confirm Password', [validators.Length(min=4, max=35)])
 
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.user = None
+
+    def validate(self):
+
+        rv = Form.validate(self)
+        if not rv:
+            return False
+
+        user_email = Registertable.query.filter_by(
+            email=self.Email.data).first()
+        user_ID = Registertable.query.filter_by(
+            userID=self.User_Id.data).first()
+        if user_email is not None:
+            self.Email.errors.append('This Email already Consist')
+            return False
+
+        if user_ID is not None:
+            self.User_Id.errors.append('This UserID already Consist')
+            return False
+
+
+
+        return True

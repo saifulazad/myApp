@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% from "_formhelpers.html" import render_field %}
 {% from "_captcha.html" import render_captchafield %}
-
+{% block login %}
+ <li><a href="/login">Login</a></li>
+{% endblock %}
 {% block content %}
 
 

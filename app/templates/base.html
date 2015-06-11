@@ -60,7 +60,8 @@
 {#      </form>#}
       <ul class="nav navbar-nav navbar-right">
           <li><a href="/profile">Profile</a> </li>
-          <li><a href="/login">Login</a></li>
+          {% block login %}{% endblock %}
+{#          <li><a href="/login">Login</a></li>#}
           <li><a href="/upload">Upload</a></li>
           <li><a href="/reg">Register</a></li>
 {#        <li class="dropdown">#}
