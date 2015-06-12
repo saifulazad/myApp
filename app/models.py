@@ -1,29 +1,5 @@
 from app import db
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(100))
-    last_name = db.Column(db.String(100))
-    login = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120))
-    password = db.Column(db.String(64))
-
-    # Flask-Login integration
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return self.id
-
-    # Required for administrative interface
-    def __unicode__(self):
-        return self.username
 #create Question model
 class Questiontable (db.Model):
     questionID = db.Column(db.Integer,primary_key=True)
@@ -35,14 +11,23 @@ class Questiontable (db.Model):
     option4 = db.Column(db.String(100))
     correctAnswer = db.Column(db.String(100))
 
+class School(db.Model):
+    schoolID = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(300))
+    registertable = db.relationship('Registertable', backref='author', lazy='dynamic')
 
 class Registertable (db.Model):
     ID = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(300))
+    schoolID = db.Column(db.Integer, db.ForeignKey('school.schoolID'))
+
     email = db.Column(db.String(100), unique=True)
     userID = db.Column(db.String(300),unique=True)
-    institute = db.Column(db.String(100))
     password = db.Column(db.String(100))
+    gender = db.Column(db.Boolean, unique=False)
+    imgURL = db.Column(db.String(100), unique=True)
+    solved = db.Column(db.Integer)
+    unsolved = db.Column(db.Integer)
     # Flask-Login integration
     def is_authenticated(self):
         return True

@@ -17,7 +17,7 @@
 <div class="col-lg-12">
     <div class="col-md-3">
         <div class="photo" id="left">
-                <img src="image.jpg" alt="photo" class="img-thumbnail">
+                <img src="{{url_for('static', filename='img/')}}{{user.imgURL}}" alt="photo" class="img-thumbnail">
         </div>
     </div>
     <div class="col-md-6">

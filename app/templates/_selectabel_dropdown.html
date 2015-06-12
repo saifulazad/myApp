@@ -1,0 +1,7 @@
+{% macro render_select_field(objects) %}
+    <select name="select" class="form-control">
+        {% for obj in objects %}
+            <option value="{{ obj.schoolID }}">{{ obj.name }}</option>
+        {% endfor %}
+    </select>
+{% endmacro %}

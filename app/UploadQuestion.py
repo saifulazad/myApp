@@ -1,8 +1,15 @@
+from flask.ext.wtf.file import FileRequired
+from sqlalchemy.sql.sqltypes import Integer
+
 __author__ = 'root'
 from wtforms import *
 from flask.ext.wtf import Form
 from wtforms.fields.html5 import EmailField
 from models import *
+from flask.ext.uploads import UploadSet, IMAGES
+from flask_wtf import Form
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+images = UploadSet('images', IMAGES)
 
 class Login(Form):
     email = StringField('email', [validators.Length(min =2, max=25)])
@@ -33,31 +40,31 @@ class Login(Form):
 	
         return True 
 
-class LoginForm(Form):
-    username = TextField('Username', [validators.Required()])
-    password = PasswordField('Password', [validators.Required()])
-
-    def __init__(self, *args, **kwargs):
-        Form.__init__(self, *args, **kwargs)
-        self.user = None
-
-    def validate(self):
-        rv = Form.validate(self)
-        if not rv:
-            return False
-
-        user = User.query.filter_by(
-            username=self.username.data).first()
-        if user is None:
-            self.username.errors.append('Unknown username')
-            return False
-
-        if not user.check_password(self.password.data):
-            self.password.errors.append('Invalid password')
-            return False
-
-        self.user = user
-        return True
+# class LoginForm(Form):
+#     username = TextField('Username', [validators.Required()])
+#     password = PasswordField('Password', [validators.Required()])
+#
+#     def __init__(self, *args, **kwargs):
+#         Form.__init__(self, *args, **kwargs)
+#         self.user = None
+#
+#     def validate(self):
+#         rv = Form.validate(self)
+#         if not rv:
+#             return False
+#
+#         user = User.query.filter_by(
+#             username=self.username.data).first()
+#         if user is None:
+#             self.username.errors.append('Unknown username')
+#             return False
+#
+#         if not user.check_password(self.password.data):
+#             self.password.errors.append('Invalid password')
+#             return False
+#
+#         self.user = user
+#         return True
 
 class QuestionForm(Form):\
 
@@ -88,12 +95,16 @@ class RegisterForm(Form):\
 
     User_Id = StringField('User_Id', [validators.Length(min=4, max=25)])
 
-    Institute = StringField('Institute', [validators.Length(min=4, max=35)])
+    Institute = IntegerField('Institute')
+
 
     Password = PasswordField('Password', [validators.Length(min=4, max=35), validators.EqualTo('Confirm', message='Passwords must match')])
 
     Confirm = PasswordField('Confirm Password', [validators.Length(min=4, max=35)])
 
+
+
+    # upload = FileField('image', validators=[ FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
         self.user = None

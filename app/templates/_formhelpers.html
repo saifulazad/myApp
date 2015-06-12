@@ -3,7 +3,9 @@
 
   {% if field.errors %}
     {% for error in field.errors %}
-      <div class="alert alert-danger" role="alert"><li>{{ error }}</li></div>
+      <li>{{ error }}</li>
+
+
     {% endfor %}
   {% endif %}
   

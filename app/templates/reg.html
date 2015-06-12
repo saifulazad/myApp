@@ -1,28 +1,10 @@
 {% extends "base.html" %}
 {% from "_formhelpers.html" import render_field %}
 {% from "_captcha.html" import render_captchafield %}
-{% block login %}
- <li><a href="/login">Login</a></li>
-{% endblock %}
+{% from "_selectabel_dropdown.html" import render_select_field %}
+
 {% block content %}
 
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            <ul class=flashes>
-            {% for category, message in messages %}
-              <li class="{{ category }}"><strong>Error:{{ category }}</strong> {{ message }}</li>
-            {% endfor %}
-            </ul>
-
-
-               <form method="post" action="{{ url_for('Register') }}">
-                {{ form.csrf_token}}
-                <input type="button" value="Back" class="btn pull-right">Back</
-              </form>
-
-
-          {% else %}
 
 
 
@@ -32,7 +14,7 @@
 			<div class="col-md-4">
 			  <br>
 
-                <form method="post" action="{{ url_for('Register') }}">
+                <form method="post" action="{{ url_for('Register') }}" enctype="multipart/form-data">
                 {{ form.csrf_token}}
 
                   <div class="form-group">
@@ -59,13 +41,10 @@
 
 
 					</div>
-                    <div class="form-group">
+                <div class="form-group">
+                    {{ render_select_field(schools) }}
+                </div>
 
-						<input type="text" class="form-control" name="Institute" placeholder="Institute">
-						{{ render_field(form.Institute) }}
-
-
-					</div>
 
                     <div class="form-group">
 
@@ -78,27 +57,29 @@
 						<input type="text" class="form-control" name="Confirm" placeholder="Confirm Password">
 						{{ render_field(form.Confirm) }}
 					</div>
+                    <div class="form-group">
+                    <p><input type=file name=file class="btn btn-info">
 
-
-
-                     {{ render_captchafield(cap_img) }}
-					{% if error %}
-
-						 <div class="alert alert-danger" role="alert"><li>{{ error }}</li></div>
-
-					{% endif %}
+                    </div>
+{#                     {{ render_captchafield(cap_img) }}#}
+{#					{% if error %}#}
+{##}
+{#						 <div class="alert alert-danger" role="alert"><li>{{ error }}</li></div>#}
+{##}
+{#					{% endif %}#}
 
 
 					<button type="submit"  value=Register class="btn pull-right">Submit</button>
 				</form>
 			</div>
-			<div class="col-md-4"></div>
+			<div class="col-md-4">
+
+
+            </div>
 		</div>
 
 
 
 	</body>
 
-    {% endif %}
-        {% endwith %}
 {% endblock %}

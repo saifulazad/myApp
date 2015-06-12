@@ -1,9 +1,20 @@
+from app.models import *
+
 sx__author__ = 'Tanvir'
 
-class User:
-    def __init__(self,name,school,Class,solprob,probset):
-        self.name=name
-        self.school=school
-        self.Class=Class
-        self.solvedProblems=solprob
-        self.problemSet=probset
+class User_profile:
+    def __init__(self,userId):
+
+
+        #    form = UserProfile(request.form)
+#   generating random numbers
+
+        user = Registertable.query.filter_by(ID = userId).first()
+
+        user_school = School.query.filter_by(schoolID = user.schoolID).first()
+
+        self.name = user.name
+
+        self.school = user_school.name
+
+        self.imgURL = user.imgURL
