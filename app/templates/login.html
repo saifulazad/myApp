@@ -1,34 +1,23 @@
 {% extends "base.html" %}
 {% from "_formhelpers.html" import render_field %}
-
+{% from "successMsg.html" import successMsg %}
 {% block content %}
 
   <body>
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
+                 {% if message %}
+                     {{  successMsg (message) }}
+                {% endif %}
 				<form method="post" action={{ url_for('login') }}>
                     {{ form.csrf_token}}
-					<div class="form-group">
-						<label for="exampleInputName2">Email</label>
-						<input type="text" class="form-control" name="email" placeholder="Email">
+
+
 						{{ render_field(form.email) }}
-						
-					
-					</div>
-					
-					<div class="form-group">
-						<label for="exampleInputName2">Password</label>
-						<input type="password" class="form-control" name="password" placeholder="Password">
 						{{ render_field(form.password) }}
-						
 					
-					</div>
-					{% if error %}
 
-						 <div class="alert alert-danger" role="alert"><li>{{ error }}</li></div>
-
-					{% endif %}
                 <div>
 					 <a class="pull-right" href="/reg">New User ?</a>
                  </div>

@@ -1,28 +1,25 @@
-<html>
-<head>
-	<link href="css/bootstrap.css" rel="stylesheet"/>
-<style type="html/css">
-body {
-    width: 200px;
-    height: 100px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: auto;
-}
-</style>
-</head>
+{% extends "base.html" %}
+{% from  "ChoseCategoryExam.html" import render_checkBox%}
+{% block content %}
 <body>
-<div>
-	<h1>Category</h1>
-	<ul class="nav nav-pills nav-stacked">
-		<li class="active"><a href="#">Parts of Speech</a></li>
-		<li><a href="#">Direct Indirect Speech</a></li>
-		<li><a href="#">Verb Agreement</a></li>
-	</ul>
-</div>
+    <div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+			  <br>
+    <form method="post" action="{{ url_for('Exam') }}" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+        {{ render_checkBox(english_categories) }}
+        <button type="submit"  value=Register class="btn pull-right">Start</button>
+    </form>
+    </div>
+    <div class="col-md-4">
+
+
+    </div>
+    </div>
+
+
+
 </body>
-</html>
+{% endblock %}

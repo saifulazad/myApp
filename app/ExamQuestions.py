@@ -1,43 +1,94 @@
-from app.models import Questiontable
-
+from app.models import Question
+import json
 __author__ = 'azad'
 import  random
 
 NUM_OF_QUESTION = 10
+# def ComputeResult(categories , booleanAns):
+#     result = []
+#     color = []
+#     category = list(set(categories))
+#     print category
+#     assoc_answer=zip(categories,booleanAns)
+#     print assoc_answer
+#     for y in category:
+#      #   print  y
+#       #  print  y==assoc_answer[0][0]
+#         total  = len([x for x in assoc_answer if x[0]==y])
+#         # total  = len([x for x in str(assoc_answer) if x[0]==y])
+#         total_correct  = len([x for x in assoc_answer if x[0]==y and x[1]==1] )
+#        # print total
+#         percent = total_correct* 100.0/float(total)
+#         if (percent > 50):
+#             color='success'
+#         else:
+#             color='danger'
+#         result.append((y,percent,color))
+#     return result
+# from app.models import Question
+#
+# __author__ = 'azad'
+# import  redis
+#
+#
+# redis_obj = redis.Redis(host='localhost', port=6379, db=0)
+#
+# class ExamController():
+#
+#     def __init__(self, user_id= None):
+#
+#        self.user_id = user_id
+#        pass
+#
+#
+#     def getquestion(self):
+#
+#         val = redis_obj.lpop(self.user_id+'questions')
+#
+#         return Question.query.filter_by(questionID = val).first()
+#
+#     def setquestions(self):
+#         questions = Question.query.all()
+#
+#         q_id = [qsn.questionID for qsn in questions]
+#
+#         if redis_obj.exists(self.user_id+'questions') is False:
+#
+#             for x in q_id:
+#
+#                 print  redis_obj.lpush(self.user_id+'questions',x)
+#
+#     def setanswer(self):
+#
+#         if redis_obj.exists(self.user_id+'useranswer') is False:
+#
+#             pass
+#
+#
+#
 class ExamQuestions():
 
-    def __init__(self, userID=None, subject=None):
+    def __init__(self, userID=None, subject=None , categories=None):
 
-        self.head = 0
         self.userID = userID
-
+        self.categories = categories
         self.subject = subject
-        self.randomQuestions = random.sample(range(1,40), NUM_OF_QUESTION)
-       # print  self.randomQuestions
-        self.questions = ( Questiontable.query.filter_by(questionID=x).first() for x in self.randomQuestions)
 
-        self.useranswer = [0]*NUM_OF_QUESTION
+        self.questions = Question.query.all()
 
 
-        self.corrcetanswer =[int(float(x.correctAnswer)) for x in self.questions]
+        self.id = [int(float(x.questionID)) for x in self.questions]
 
-        print self.corrcetanswer
-        print self.useranswer
+    def get_all(self):
 
-    def getQuestion(self):
+        return  self.id
 
-        question = self.questions[self.head]
+class Hi():
 
-        self.head+=1
-
-        return  question
-
-    def setAnswer(self, given_value):
-        self.useranswer[self.head-1] = given_value
-
-        
-    def is_last_question(self):
-        return self.head==NUM_OF_QUESTION
-
+    def __init__(self):
+        self.ok = 'OK'
 if __name__ == "__main__":
-     ob  = ExamQuestions()
+     ob  = Hi()
+     ob.ok = 'as'
+
+     print ob.ok

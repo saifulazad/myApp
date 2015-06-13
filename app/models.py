@@ -1,20 +1,33 @@
 from app import db
+from datetime import datetime
 
 #create Question model
-class Questiontable (db.Model):
+class Question (db.Model):
     questionID = db.Column(db.Integer,primary_key=True)
-    description = db.Column(db.String(300))
-    category = db.Column(db.String(100))
+    description = db.Column(db.String(300),unique=True)
+    categoryID = db.Column(db.Integer, db.ForeignKey('category.ID'))
+    userID = db.Column(db.Integer, db.ForeignKey('registertable.ID'))
     option1 = db.Column(db.String(100))
     option2 = db.Column(db.String(100))
     option3 = db.Column(db.String(100))
     option4 = db.Column(db.String(100))
-    correctAnswer = db.Column(db.String(100))
+    correctAnswer = db.Column(db.Integer)
+    hint = db.Column(db.String(300))
+    solvedUser = db.Column(db.Integer)
+    failedUser = db.Column(db.Integer)
+    imgURL = db.Column(db.String(300))
+    dateUploaded = db.Column(db.DateTime)
+
+class Category(db.Model):
+    ID = db.Column(db.Integer,primary_key=True)
+    category = db.Column(db.String(300))
+    subject = db.Column(db.String(300))
+    questions = db.relationship('Question',backref='category',lazy='dynamic')
 
 class School(db.Model):
     schoolID = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(300))
-    registertable = db.relationship('Registertable', backref='author', lazy='dynamic')
+    registertable = db.relationship('Registertable', backref='school', lazy='dynamic')
 
 class Registertable (db.Model):
     ID = db.Column(db.Integer,primary_key=True)
@@ -28,6 +41,7 @@ class Registertable (db.Model):
     imgURL = db.Column(db.String(100), unique=True)
     solved = db.Column(db.Integer)
     unsolved = db.Column(db.Integer)
+    questions = db.relationship('Question',backref='user',lazy='dynamic')
     # Flask-Login integration
     def is_authenticated(self):
         return True

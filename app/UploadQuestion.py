@@ -1,5 +1,6 @@
 from flask.ext.wtf.file import FileRequired
 from sqlalchemy.sql.sqltypes import Integer
+from wtforms.validators import InputRequired, Required
 
 __author__ = 'root'
 from wtforms import *
@@ -68,13 +69,13 @@ class Login(Form):
 
 class QuestionForm(Form):\
 
-    description = StringField('description', [validators.Length(min = 3, max=175)])
-    category = StringField('category', [validators.Length( max=35)])
-    option1 = StringField('option1', [validators.Length( max=25)])
-    option2 = StringField('option2', [validators.Length( max=35)])
-    option3 = StringField('option3', [validators.Length( max=35)])
-    option4 = StringField('option4', [validators.Length( max=35)])
-    correctAnswer = StringField('correctAnswer', [validators.Length( max=25)])
+    description = StringField('description', [validators.Length(min = 3, max=175)],description={'placeholder': 'Description'})
+    category = StringField('category', [validators.Length( max=35)],description={'placeholder': 'Category'})
+    option1 = StringField('option1', [validators.Length( max=25)],description={'placeholder': 'Option 1'})
+    option2 = StringField('option2', [validators.Length( max=35)],description={'placeholder': 'Option 2'})
+    option3 = StringField('option3', [validators.Length( max=35)],description={'placeholder': 'Option 3'})
+    option4 = StringField('option4', [validators.Length( max=35)],description={'placeholder': 'Option 4'})
+    correctAnswer = IntegerField('correctAnswer',description={'placeholder': 'CorrectAnswer'})
 
 class UserProfile(Form):
     Name = StringField('Name', [validators.Length(min = 3, max=175)])
@@ -89,24 +90,27 @@ class UserProfile(Form):
 
 class RegisterForm(Form):\
 
-    Name = StringField('Name', [validators.Length(min = 3, max=175)])
+    Name = StringField('Name', [validators.Length(min = 3, max=175)],description={'placeholder': 'Name'})
 
-    Email = EmailField('Email', [validators.Length( max=35), validators.Email()])
+    Email = EmailField('Email', [validators.Length( max=35), validators.Email()] ,description={'placeholder': 'Email'})
 
-    User_Id = StringField('User_Id', [validators.Length(min=4, max=25)])
+    User_Id = StringField('User_Id', [validators.Length(min=4, max=25)],description={'placeholder': 'User ID'})
 
-    Institute = IntegerField('Institute')
-
-
-    Password = PasswordField('Password', [validators.Length(min=4, max=35), validators.EqualTo('Confirm', message='Passwords must match')])
-
-    Confirm = PasswordField('Confirm Password', [validators.Length(min=4, max=35)])
+    Institute = IntegerField('Institute',description={'placeholder': 'Institute'})
 
 
+    Password = PasswordField('Password', [validators.Length(min=1, max=35), validators.EqualTo('Confirm', message='Passwords must match')]
+                             ,description={'placeholder': 'Password'})
+
+    Confirm = PasswordField('Confirm Password', description={'placeholder': 'Confirm Password'})
+
+    gender = RadioField('Gender', choices=[('1','Male'),('0','Female')],validators=[Required()])
 
     # upload = FileField('image', validators=[ FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
+        print  args
+        print kwargs
         self.user = None
 
     def validate(self):
@@ -128,5 +132,5 @@ class RegisterForm(Form):\
             return False
 
 
-
+        print  self.gender.data
         return True

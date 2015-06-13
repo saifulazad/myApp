@@ -1,12 +1,30 @@
+{#{% macro render_field(field) %}#}
+{##}
+{##}
+{#  {% if field.errors %}#}
+{#    {% for error in field.errors %}#}
+{#      <li>{{ error }}</li>#}
+{##}
+{##}
+{#    {% endfor %}#}
+{#  {% endif %}#}
+{#  #}
+{#{% endmacro %}#}
 {% macro render_field(field) %}
 
+    <div class="form-group">
+{{ field(class_='form-control',placeholder=field.description['placeholder']) }}
 
-  {% if field.errors %}
-    {% for error in field.errors %}
-      <li>{{ error }}</li>
+    {% if field.errors %}
+        <ul class=errors>
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 
 
-    {% endfor %}
-  {% endif %}
-  
+
+    </div>
+
 {% endmacro %}

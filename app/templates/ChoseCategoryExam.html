@@ -1,0 +1,12 @@
+{% macro render_checkBox(categories) %}
+
+    {% for category in categories.pair %}
+    <div class="form-group">
+        <input type="checkbox" aria-label="Checkbox for following text input" name= {{  categories.select_liertal }} value={{ category[0] }}>
+
+        {{ category[1] }}
+    </div>
+
+    {% endfor %}
+
+{% endmacro %}
