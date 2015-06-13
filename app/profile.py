@@ -18,3 +18,7 @@ class User_profile:
         self.school = user_school.name
 
         self.imgURL = user.imgURL
+
+        self.solve_ans = SolveProblems.query.filter_by(userID = userId).first()
+
+        print self.solve_ans

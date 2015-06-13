@@ -28,6 +28,11 @@ class School(db.Model):
     schoolID = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(300))
     registertable = db.relationship('Registertable', backref='school', lazy='dynamic')
+class SolveProblems(db.Model):
+    ID = db.Column(db.Integer,primary_key=True)
+    userID = db.Column(db.Integer)
+    questionID = db.Column(db.Integer,unique=False)
+
 
 class Registertable (db.Model):
     ID = db.Column(db.Integer,primary_key=True)

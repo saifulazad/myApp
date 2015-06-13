@@ -5,6 +5,7 @@ import random
 from flask.ext.login import login_user , logout_user ,  login_required
 from UploadQuestion import *
 from app.PhotoHandler import Photo
+from app.ResultProcessor import ResultProcessor
 from profile import *
 from datetime import datetime
 from ExamQuestions import *
@@ -101,7 +102,13 @@ def Next():
 @login_required
 def Result():
 
-    pass
+    ob =ResultProcessor(session['user_id'])
+
+    result =ob.get_user_answer(session['useranswer'])
+    session.pop('useranswer', None)
+    session.pop('tmpquestionsID', None)
+    session.pop('questionsID', None)
+    return render_template("result.html", result =result)
 @app.route('/category', methods=['GET'])
 @login_required
 def category():
