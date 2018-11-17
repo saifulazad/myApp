@@ -1,5 +1,5 @@
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from flask import Flask
 UPLOAD_FOLDER = '/home/azad/myApp/app/static/img'
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'gif', 'png'])
